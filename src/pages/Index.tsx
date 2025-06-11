@@ -22,10 +22,10 @@ const Index = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hi there! 👋 I'm here to help answer your questions about sexual health. Everything we discuss is private and confidential. What would you like to know?",
+      text: "สวัสดีค่ะ! 👋 ฉันพร้อมจะช่วยตอบคำถามเกี่ยวกับสุขภาพทางเพศของคุณ การสนทนาของเราเป็นความลับและส่วนตัว คุณอยากรู้เรื่องอะไรคะ?",
       isUser: false,
       timestamp: new Date(),
-      quickReplies: ["STI testing", "Birth control", "Relationship questions", "Body questions"]
+      quickReplies: ["การตรวจหาเชื้อ STI", "การคุมกำเนิด", "คำถามเรื่องความสัมพันธ์", "คำถามเรื่องร่างกาย"]
     }
   ]);
   const [inputText, setInputText] = useState('');
@@ -33,12 +33,12 @@ const Index = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickPrompts: QuickPrompt[] = [
-    { text: "How do I get tested for STIs?", category: "testing" },
-    { text: "Tell me about birth control options", category: "contraception" },
-    { text: "What are symptoms of common STIs?", category: "symptoms" },
-    { text: "How can I talk to my partner about sex?", category: "communication" },
-    { text: "Is what I'm experiencing normal?", category: "general" },
-    { text: "Where can I get help nearby?", category: "resources" }
+    { text: "ฉันจะไปตรวจหาเชื้อ STI ได้ที่ไหน?", category: "testing" },
+    { text: "บอกฉันเกี่ยวกับตัวเลือกการคุมกำเนิด", category: "contraception" },
+    { text: "อาการของเชื้อ STI ทั่วไปมีอะไรบ้าง?", category: "symptoms" },
+    { text: "ฉันจะคุยกับคู่ของฉันเรื่องเซ็กส์ได้อย่างไร?", category: "communication" },
+    { text: "สิ่งที่ฉันประสบอยู่นี้เป็นเรื่องปกติไหม?", category: "general" },
+    { text: "ฉันจะหาความช่วยเหลือในบริเวณใกล้เคียงได้ที่ไหน?", category: "resources" }
   ];
 
   const scrollToBottom = () => {
@@ -52,44 +52,44 @@ const Index = () => {
   const generateResponse = (userMessage: string): { text: string; quickReplies?: string[] } => {
     const lowerMessage = userMessage.toLowerCase();
     
-    if (lowerMessage.includes('sti') || lowerMessage.includes('std') || lowerMessage.includes('test')) {
+    if (lowerMessage.includes('sti') || lowerMessage.includes('std') || lowerMessage.includes('ตรวจ') || lowerMessage.includes('เชื้อ')) {
       return {
-        text: "Getting tested for STIs is a normal part of taking care of your health! 🌟 Most tests are quick and often just involve a urine sample or a simple blood test. You can get tested at health clinics, your doctor's office, or many community health centers. The important thing is that testing is confidential and helps you stay informed about your health.",
-        quickReplies: ["Where can I get tested?", "What to expect during testing", "How often should I get tested?", "Tell me more about STIs"]
+        text: "การตรวจหาเชื้อ STI เป็นส่วนหนึ่งของการดูแลสุขภาพที่ปกติมากค่ะ! 🌟 การตรวจส่วนใหญ่เร็วและมักจะเป็นเพียงการตรวจปัสสาวะหรือเจาะเลือดง่ายๆ คุณสามารถไปตรวจได้ที่คลินิกสุขภาพ คลินิกแพทย์ หรือศูนย์สุขภาพชุมชนหลายแห่ง สิ่งสำคัญคือการตรวจนั้นเป็นความลับและช่วยให้คุณรู้เรื่องสุขภาพของตัวเองค่ะ",
+        quickReplies: ["ฉันจะไปตรวจได้ที่ไหน?", "ขั้นตอนการตรวจเป็นอย่างไร?", "ควรไปตรวจบ่อยแค่ไหน?", "บอกฉันเพิ่มเติมเรื่อง STI"]
       };
     }
     
-    if (lowerMessage.includes('birth control') || lowerMessage.includes('contraception') || lowerMessage.includes('pregnancy')) {
+    if (lowerMessage.includes('คุมกำเนิด') || lowerMessage.includes('ป้องกันการตั้งครรภ์') || lowerMessage.includes('ตั้งครรภ์')) {
       return {
-        text: "There are many effective birth control options available! 💊 From pills and patches to IUDs and implants, each method has different benefits. The best choice depends on your lifestyle, health, and preferences. A healthcare provider can help you find what works best for you.",
-        quickReplies: ["Types of birth control", "How effective are they?", "Side effects to know", "Where to get birth control"]
+        text: "มีวิธีการคุมกำเนิดที่มีประสิทธิภาพหลายแบบค่ะ! 💊 ตั้งแต่ยาเม็ด แผ่นแปะ ไปจนถึง IUD และการใส่ห่วง แต่ละวิธีมีข้อดีที่แตกต่างกัน ทางเลือกที่ดีที่สุดขึ้นอยู่กับวิถีชีวิต สุขภาพ และความต้องการของคุณ แพทย์สามารถช่วยคุณหาสิ่งที่เหมาะสมที่สุดค่ะ",
+        quickReplies: ["ประเภทของการคุมกำเนิด", "ประสิทธิภาพแค่ไหน?", "ผลข้างเคียงที่ควรรู้", "จะหาการคุมกำเนิดได้ที่ไหน"]
       };
     }
     
-    if (lowerMessage.includes('symptom') || lowerMessage.includes('normal') || lowerMessage.includes('body')) {
+    if (lowerMessage.includes('อาการ') || lowerMessage.includes('ปกติ') || lowerMessage.includes('ร่างกาย')) {
       return {
-        text: "It's completely normal to have questions about your body! 🤗 Many changes and sensations are part of normal development and health. However, if you notice unusual discharge, pain, bumps, or anything that worries you, it's always okay to talk to a healthcare provider. They're there to help, not judge.",
-        quickReplies: ["Common symptoms to know", "When to see a doctor", "Body changes and puberty", "Self-care tips"]
+        text: "การมีคำถามเกี่ยวกับร่างกายของคุณเป็นเรื่องปกติมากค่ะ! 🤗 การเปลี่ยนแปลงและความรู้สึกหลายอย่างเป็นส่วนหนึ่งของการพัฒนาและสุขภาพที่ปกติ อย่างไรก็ตาม หากคุณสังเกตเห็นการคัดหลั่งที่ผิดปกติ ความเจ็บปวด ตุ่มผื่น หรือสิ่งใดที่ทำให้คุณกังวล คุณสามารถปรึกษาแพทย์ได้เสมอค่ะ พวกเขาอยู่ที่นั่นเพื่อช่วยเหลือ ไม่ใช่เพื่อตัดสิน",
+        quickReplies: ["อาการทั่วไปที่ควรรู้", "เมื่อไหร่ควรไปหาแพทย์", "การเปลี่ยนแปลงร่างกายและวัยรุ่น", "เคล็ดลับการดูแลตัวเอง"]
       };
     }
     
-    if (lowerMessage.includes('partner') || lowerMessage.includes('relationship') || lowerMessage.includes('talk')) {
+    if (lowerMessage.includes('คู่') || lowerMessage.includes('ความสัมพันธ์') || lowerMessage.includes('คุย')) {
       return {
-        text: "Communication with partners is so important! 💕 Honest conversations about boundaries, consent, and health help build trust and keep everyone safe. It might feel awkward at first, but these talks get easier with practice. Remember, you have the right to say no to anything that makes you uncomfortable.",
-        quickReplies: ["How to start the conversation", "Talking about boundaries", "Consent and communication", "Dealing with pressure"]
+        text: "การสื่อสารกับคู่ของคุณสำคัญมากค่ะ! 💕 การสนทนาอย่างซื่อสัตย์เกี่ยวกับขอบเขต ความยินยอม และสุขภาพ ช่วยสร้างความไว้วางใจและรักษาความปลอดภัยของทุกคน อาจจะรู้สึกอึดอัดในตอนแรก แต่การสนทนาเหล่านี้จะง่ายขึ้นเมื่อฝึกฝนค่ะ จำไว้ว่าคุณมีสิทธิ์ที่จะปฏิเสธสิ่งใดที่ทำให้คุณรู้สึกไม่สบายใจ",
+        quickReplies: ["จะเริ่มบทสนทนาอย่างไร", "การพูดคุยเรื่องขอบเขต", "ความยินยอมและการสื่อสาร", "การรับมือกับแรงกดดัน"]
       };
     }
     
-    if (lowerMessage.includes('help') || lowerMessage.includes('clinic') || lowerMessage.includes('doctor')) {
+    if (lowerMessage.includes('ช่วยเหลือ') || lowerMessage.includes('คลินิก') || lowerMessage.includes('แพทย์')) {
       return {
-        text: "There are many places where you can get confidential help! 🏥 Planned Parenthood, community health centers, and your family doctor are all great options. Many services are available regardless of your insurance situation or ability to pay.",
-        quickReplies: ["Find clinics near me", "What services are available?", "Do I need parent permission?", "Cost and insurance info"]
+        text: "มีหลายสถานที่ที่คุณสามารถขอความช่วยเหลือเป็นความลับได้ค่ะ! 🏥 แพลนด์ แพร์เรนต์ฮูด ศูนย์สุขภาพชุมชน และแพทย์ประจำครอบครัวของคุณ ล้วนเป็นตัวเลือกที่ดี บริการหลายอย่างมีให้ไม่ว่าคุณจะมีประกันหรือไม่มีเงินจ่ายค่ะ",
+        quickReplies: ["หาคลินิกใกล้ฉัน", "มีบริการอะไรบ้าง?", "ต้องได้รับอนุญาตจากผู้ปกครองไหม?", "ข้อมูลค่าใช้จ่ายและประกัน"]
       };
     }
     
     return {
-      text: "Thanks for sharing that with me. 😊 Sexual health covers a lot of topics, and it's great that you're asking questions! Whether it's about your body, relationships, protection, or just understanding what's normal - I'm here to help with reliable, judgment-free information.",
-      quickReplies: ["STI information", "Birth control basics", "Body and health questions", "Relationship advice"]
+      text: "ขอบคุณที่แบ่งปันเรื่องนี้กับฉันค่ะ 😊 สุขภาพทางเพศครอบคลุมหัวข้อหลายเรื่อง และเป็นเรื่องดีที่คุณถามคำถาม! ไม่ว่าจะเป็นเรื่องร่างกาย ความสัมพันธ์ การป้องกัน หรือแค่การทำความเข้าใจว่าอะไรเป็นเรื่องปกติ ฉันพร้อมจะช่วยด้วยข้อมูลที่เชื่อถือได้และไม่มีการตัดสินค่ะ",
+      quickReplies: ["ข้อมูลเรื่อง STI", "พื้นฐานการคุมกำเนิด", "คำถามเรื่องร่างกายและสุขภาพ", "คำแนะนำเรื่องความสัมพันธ์"]
     };
   };
 
@@ -137,13 +137,13 @@ const Index = () => {
               <Heart className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-gray-800">Health Chat</h1>
-              <p className="text-sm text-gray-600">Your confidential health companion</p>
+              <h1 className="text-lg font-semibold text-gray-800">แชทสุขภาพ</h1>
+              <p className="text-sm text-gray-600">เพื่อนคู่ใจด้านสุขภาพที่เป็นความลับ</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Shield className="w-4 h-4" />
-            <span>Private & Confidential</span>
+            <span>ส่วนตัวและเป็นความลับ</span>
           </div>
         </div>
       </div>
@@ -199,7 +199,7 @@ const Index = () => {
           {/* Quick Prompts (shown when no messages or after bot response) */}
           {messages.length <= 1 && (
             <div className="px-6 pb-4">
-              <p className="text-sm text-gray-600 mb-3">Or try asking about:</p>
+              <p className="text-sm text-gray-600 mb-3">หรือลองถามเรื่อง:</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {quickPrompts.map((prompt, index) => (
                   <Button
@@ -222,7 +222,7 @@ const Index = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(inputText)}
-                placeholder="Type your question here..."
+                placeholder="พิมพ์คำถามของคุณที่นี่..."
                 className="flex-1 border-gray-300 focus:border-blue-500 rounded-full"
               />
               <Button
@@ -243,19 +243,19 @@ const Index = () => {
               <MapPin className="w-5 h-5 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-800 mb-2">Need Professional Help?</h3>
+              <h3 className="font-semibold text-gray-800 mb-2">ต้องการความช่วยเหลือจากผู้เชี่ยวชาญ?</h3>
               <p className="text-sm text-gray-600 mb-4">
-                While I can provide general information, a healthcare provider can give you personalized advice and care. Many services are confidential and available regardless of age or insurance.
+                แม้ว่าฉันสามารถให้ข้อมูลทั่วไปได้ แต่แพทย์สามารถให้คำแนะนำและการดูแลที่เหมาะสมกับคุณได้ บริการหลายอย่างเป็นความลับและมีให้ไม่ว่าอายุหรือประกันของคุณจะเป็นอย่างไร
               </p>
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm" className="bg-white border-green-300 text-green-700 hover:bg-green-50">
-                  Find Clinics Near Me
+                  หาคลินิกใกล้ฉัน
                 </Button>
                 <Button variant="outline" size="sm" className="bg-white border-green-300 text-green-700 hover:bg-green-50">
-                  Planned Parenthood
+                  แพลนด์ แพร์เรนต์ฮูด
                 </Button>
                 <Button variant="outline" size="sm" className="bg-white border-green-300 text-green-700 hover:bg-green-50">
-                  Crisis Text Line
+                  สายด่วนช่วยเหลือ
                 </Button>
               </div>
             </div>
@@ -265,7 +265,7 @@ const Index = () => {
         {/* Privacy Notice */}
         <div className="mt-4 text-center">
           <p className="text-xs text-gray-500">
-            🔒 Your conversations are private and not stored. This tool provides general information only and is not a substitute for professional medical advice.
+            🔒 การสนทนาของคุณเป็นส่วนตัวและไม่ถูกเก็บไว้ เครื่องมือนี้ให้ข้อมูลทั่วไปเท่านั้น และไม่สามารถทดแทนคำแนะนำทางการแพทย์จากผู้เชี่ยวชาญได้
           </p>
         </div>
       </div>
